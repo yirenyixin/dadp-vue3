@@ -31,13 +31,13 @@ const sources: any = [];
 
 // 取消函数
 const removeSource = (config: any) => {
-  // if (config)
-  //   for (const item in sources) {
-  //     if (sources[item].umet === config.url + '&' + config.method) {
-  //       sources[item].cancel('已取消重复请求，请勿重复请求');
-  //       sources.splice(item, 1);
-  //     }
-  //   }
+//   if (config)
+//     for (const item in sources) {
+//       if (sources[item].umet === config.url + '&' + config.method) {
+//         sources[item].cancel('已取消重复请求，请勿重复请求');
+//         sources.splice(item, 1);
+//       }
+//     }
 };
 
 class AxiosHttpRequest implements BaseType, Get, Post {

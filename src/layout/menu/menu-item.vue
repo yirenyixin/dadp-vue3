@@ -3,7 +3,7 @@
     <template v-if="!item.children || !item.children.length">
       <menu-item-link :to="item.path">
         <el-menu-item :index="item.path">
-          <span style="width: 50px; position: relative">
+          <span style="width: 58px; position: relative">
             <v-svg-icon
                 v-if="item.meta.icon"
                 :iconName="item.meta.icon ? `#${item.meta.icon}` : '#menu-default'"
@@ -52,11 +52,17 @@ const methodsMap = {
       pageNo: 1,
       pageSize: 100,
     };
+    console.log("qq")
     const { data: res } = await pmmApi.getRemindList(params);
     total.value = res.total;
     // console.log(total.value);
     if (callback) {
-      callback(total.value);
+      if(total.value<100){
+          callback(total.value);
+      }
+      else{
+          callback('99+' as any);
+      }
     }
   },
 };
@@ -85,7 +91,7 @@ export default defineComponent({
       this.badgeValue = value;
     },
   },
-  mounted() {
+  mounted() {//会造成多次请求
     if (this.item?.meta?.title === '提醒表') {
       methodsMap.doQuery(true, this.updateBadgeValue);
     }
@@ -101,16 +107,18 @@ export default defineComponent({
 <style lang="scss" scoped>
 .badge {
   position: absolute;
-  top: 1px;
+  top: -4px;
   right: 1px;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 16px;
-  height: 16px;
+  width: auto; //宽度自适应
+  height: 10px;
   border-radius: 50%;
   background-color: blue;
   color: white;
   font-size: 12px;
+  padding: 4px; // 添加一些内边距，让徽章不至于太拥挤
+
 }
 </style>
